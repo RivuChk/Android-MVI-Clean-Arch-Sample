@@ -27,8 +27,6 @@ android {
 }
 
 dependencies {
-    def mockitoVersion = '1.10.19'
-    def mockitoKotlinVersion = '1.5.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Dependencies.AndroidX.appCompat
