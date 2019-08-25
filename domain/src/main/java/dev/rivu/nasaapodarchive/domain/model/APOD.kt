@@ -6,7 +6,6 @@ data class APOD (
     val mediaType: MediaType,
     val title: String,
     val url: String,
-    val serviceVersion: String,
     val hdUrl: String? = null,
     val copyright: String? = null
 ) {

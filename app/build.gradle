@@ -29,8 +29,9 @@ dependencies {
     implementation Dependencies.AndroidX.core
     implementation Dependencies.AndroidX.constraintLayout
 
-    //TODO: Move Tests to Dependencies.kt
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(":domain")
+
+    testImplementation Dependencies.Test.junit
+    testImplementation Dependencies.Test.androidTestRunner
+    testImplementation Dependencies.Test.espresso
 }

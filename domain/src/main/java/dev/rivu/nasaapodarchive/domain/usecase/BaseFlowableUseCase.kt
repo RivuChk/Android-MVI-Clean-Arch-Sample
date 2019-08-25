@@ -1,4 +1,4 @@
-package dev.rivu.nasaapodarchive.domain.interactor
+package dev.rivu.nasaapodarchive.domain.usecase
 
 import dev.rivu.nasaapodarchive.domain.schedulers.SchedulerProvider
 import io.reactivex.Flowable

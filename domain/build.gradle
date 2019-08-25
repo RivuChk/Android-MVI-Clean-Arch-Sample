@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion 28
@@ -26,6 +27,8 @@ android {
 }
 
 dependencies {
+    def mockitoVersion = '1.10.19'
+    def mockitoKotlinVersion = '1.5.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Dependencies.AndroidX.appCompat
@@ -34,10 +37,16 @@ dependencies {
     api Dependencies.Rx.rxJava2
     api Dependencies.Rx.rxAndroid2
 
-    //TODO: Move Tests to Dependencies.kt
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //Dagger
+    implementation Dependencies.Dagger.android
+    implementation Dependencies.Dagger.androidSupport
+    kapt Dependencies.Dagger.compiler
+    kapt Dependencies.Dagger.annotationProcessor
+
+    testImplementation Dependencies.Test.mockito
+    testImplementation Dependencies.Test.mockitoKotlin
+    testImplementation Dependencies.Test.hamcrest
+    testImplementation Dependencies.Test.junit
 }
 repositories {
     mavenCentral()
