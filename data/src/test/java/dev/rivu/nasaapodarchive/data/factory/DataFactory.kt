@@ -1,4 +1,4 @@
-package dev.rivu.nasaapodarchive.domain.factory
+package dev.rivu.nasaapodarchive.data.factory
 
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import dev.rivu.nasaapodarchive.utils.parseDate

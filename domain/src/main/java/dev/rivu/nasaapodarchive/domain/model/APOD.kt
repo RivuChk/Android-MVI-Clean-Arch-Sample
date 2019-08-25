@@ -1,7 +1,9 @@
 package dev.rivu.nasaapodarchive.domain.model
 
+import java.util.Date
+
 data class APOD (
-    val date: String,
+    val date: Date,
     val explanation: String,
     val mediaType: MediaType,
     val title: String,

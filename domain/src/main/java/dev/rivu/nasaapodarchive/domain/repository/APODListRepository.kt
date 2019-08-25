@@ -6,7 +6,10 @@ import io.reactivex.Single
 
 interface APODListRepository {
     fun getApod(date: String): Single<APOD>
+
     fun getApods(startDate: String, count: Int): Single<List<APOD>>
+
     fun saveApods(vararg apods: APOD): Completable
+
     fun cleareApods(): Completable
 }
