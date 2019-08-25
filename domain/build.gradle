@@ -1,36 +1,44 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
+
+
     defaultConfig {
-        applicationId Config.applicationId
         minSdkVersion Config.minSdkVersion
         targetSdkVersion Config.targetSdkVersion
         versionCode Config.versionCode
         versionName Config.versionName
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dependencies.kotlin
+
     implementation Dependencies.AndroidX.appCompat
     implementation Dependencies.AndroidX.core
-    implementation Dependencies.AndroidX.constraintLayout
+    implementation Dependencies.kotlin
+    api Dependencies.Rx.rxJava2
+    api Dependencies.Rx.rxAndroid2
 
     //TODO: Move Tests to Dependencies.kt
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+repositories {
+    mavenCentral()
 }
