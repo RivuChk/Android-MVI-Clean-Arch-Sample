@@ -57,8 +57,6 @@ local.properties
 
 # gradle directory
 .gradle
-gradlew
-gradlew.bat
 
 # backup files
 *.bak
