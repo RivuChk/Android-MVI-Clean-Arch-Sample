@@ -29,11 +29,11 @@ public object DataFactory {
     fun randomDate(): Date {
         return "${randomInt(
             2017,
-            2018
+            2019
         )}-${randomInt(
-            1,
+            10,
             12
-        )}-${randomInt(1, 30)}".parseDate()
+        )}-${randomInt(10, 30)}".parseDate()
     }
 
     fun randomString(): String {
