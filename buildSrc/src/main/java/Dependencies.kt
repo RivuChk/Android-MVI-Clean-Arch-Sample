@@ -20,6 +20,7 @@ object Versions {
         val hamcrest = "1.3"
         val mockito = "1.10.19"
         val mockitoKotlin = "1.5.0"
+        val androidxTestExt = "1.1.1"
     }
 }
 
@@ -55,11 +56,18 @@ object Dependencies {
         val mockito = "org.mockito:mockito-core:${Versions.Test.mockito}"
         val mockitoKotlin = "com.nhaarman:mockito-kotlin:${Versions.Test.mockitoKotlin}"
         val hamcrest = "org.hamcrest:hamcrest-all:${Versions.Test.hamcrest}"
+        val androidxTestExt = "androidx.test.ext:junit:${Versions.Test.androidxTestExt}"
     }
     val Network = object {
         val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         val okHttp = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
         val rxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
         val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    }
+    val Database = object {
+        val room = "androidx.room:room-runtime:${Versions.room}"
+        val roomAnnotation = "androidx.room:room-compiler:${Versions.room}"
+        val roomRx2 = "androidx.room:room-rxjava2:${Versions.room}"
+        val roomTest = "androidx.room:room-testing:${Versions.room}"
     }
 }

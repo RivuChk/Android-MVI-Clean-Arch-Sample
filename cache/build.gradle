@@ -15,16 +15,20 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
     }
 
     buildTypes {
         release {
-            buildConfigField "String", "API_KEY", NASAApodKey
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            buildConfigField "String", "API_KEY", NASAApodKey
         }
     }
 
@@ -35,15 +39,12 @@ dependencies {
 
     implementation project(":data")
 
-    implementation Dependencies.AndroidX.appCompat
-    implementation Dependencies.AndroidX.core
     implementation Dependencies.kotlin
 
-    //Retrofit
-    implementation Dependencies.Network.retrofit
-    implementation Dependencies.Network.okHttp
-    implementation Dependencies.Network.rxJava2Adapter
-    implementation Dependencies.Network.gsonConverter
+    //room
+    implementation Dependencies.Database.room
+    implementation Dependencies.Database.roomRx2
+    kapt Dependencies.Database.roomAnnotation
 
     //Dagger
     implementation Dependencies.Dagger.android
@@ -57,6 +58,8 @@ dependencies {
     testImplementation Dependencies.Test.junit
 
     testImplementation Dependencies.Test.junit
-    testImplementation Dependencies.Test.androidTestRunner
-    testImplementation Dependencies.Test.espresso
+    androidTestImplementation Dependencies.Test.androidTestRunner
+    androidTestImplementation Dependencies.Test.espresso
+    androidTestImplementation Dependencies.Test.androidxTestExt
+    testImplementation Dependencies.Database.roomTest
 }

@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApodService {
-    @GET("/planetary/apod?api_key=af4NFhLQo9KVFZW03H55UlVoDQnKKbC7Xk1UD0hk")
+    @GET("/planetary/apod?api_key=${BuildConfig.API_KEY}")
     fun getApod(@Query("date") date: String): Single<ApodResponse>
 }

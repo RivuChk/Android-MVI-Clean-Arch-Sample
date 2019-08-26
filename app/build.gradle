@@ -33,6 +33,6 @@ dependencies {
     implementation Dependencies.AndroidX.constraintLayout
 
     testImplementation Dependencies.Test.junit
-    testImplementation Dependencies.Test.androidTestRunner
-    testImplementation Dependencies.Test.espresso
+    androidTestImplementation Dependencies.Test.androidTestRunner
+    androidTestImplementation Dependencies.Test.espresso
 }

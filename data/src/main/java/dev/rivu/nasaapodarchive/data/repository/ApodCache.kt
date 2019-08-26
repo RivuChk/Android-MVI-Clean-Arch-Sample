@@ -13,7 +13,7 @@ interface ApodCache {
     /**
      * Save a given list of Apods to the cache.
      */
-    fun saveApods(bufferoos: List<APOD>): Completable
+    fun saveApods(apods: List<APOD>): Completable
 
 
     /**
