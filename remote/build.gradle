@@ -29,11 +29,17 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(":data")
+
     implementation Dependencies.AndroidX.appCompat
     implementation Dependencies.AndroidX.core
     implementation Dependencies.kotlin
-    api Dependencies.Rx.rxJava2
-    api Dependencies.Rx.rxAndroid2
+
+    //Retrofit
+    implementation Dependencies.Network.retrofit
+    implementation Dependencies.Network.okHttp
+    implementation Dependencies.Network.rxJava2Adapter
+    implementation Dependencies.Network.gsonConverter
 
     //Dagger
     implementation Dependencies.Dagger.android
@@ -45,7 +51,8 @@ dependencies {
     testImplementation Dependencies.Test.mockitoKotlin
     testImplementation Dependencies.Test.hamcrest
     testImplementation Dependencies.Test.junit
-}
-repositories {
-    mavenCentral()
+
+    testImplementation Dependencies.Test.junit
+    testImplementation Dependencies.Test.androidTestRunner
+    testImplementation Dependencies.Test.espresso
 }

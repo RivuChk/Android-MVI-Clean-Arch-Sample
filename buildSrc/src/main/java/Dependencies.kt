@@ -1,6 +1,9 @@
 object Versions {
     val kotlin = "1.3.50"
     val dagger = "2.20"
+    val retrofit = "2.6.1"
+    val okHttp = "4.1.0"
+    val room = "2.1.0"
     object AndroidX {
         val appCompat = "1.0.2"
         val core = "1.0.2"
@@ -52,5 +55,11 @@ object Dependencies {
         val mockito = "org.mockito:mockito-core:${Versions.Test.mockito}"
         val mockitoKotlin = "com.nhaarman:mockito-kotlin:${Versions.Test.mockitoKotlin}"
         val hamcrest = "org.hamcrest:hamcrest-all:${Versions.Test.hamcrest}"
+    }
+    val Network = object {
+        val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+        val okHttp = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+        val rxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
+        val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     }
 }

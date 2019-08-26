@@ -13,6 +13,20 @@ data class APOD (
 ) {
     enum class MediaType(val value: String) {
         VIDEO("video"),
-        IMAGE("image")
+        IMAGE("image");
+
+        companion object {
+            @JvmStatic
+            fun valueOfIgnoringCase(str: String): MediaType {
+                return if(str.equals(VIDEO.name, true)) {
+                    VIDEO
+                } else if(str.equals(IMAGE.name, true)) {
+                    IMAGE
+                } else {
+                    throw IllegalArgumentException("No enum constant dev.rivu.nasaapodarchive.domain.model.APOD.MediaType.$str")
+                }
+
+            }
+        }
     }
 }
