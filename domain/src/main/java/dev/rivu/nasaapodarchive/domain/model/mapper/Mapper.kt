@@ -1,4 +1,4 @@
-package dev.rivu.nasaapodarchive.data.mapper
+package dev.rivu.nasaapodarchive.domain.model.mapper
 
 /**
  * Interface for model mappers. It provides helper methods that facilitate

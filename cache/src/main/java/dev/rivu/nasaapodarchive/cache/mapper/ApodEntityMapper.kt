@@ -1,7 +1,7 @@
 package dev.rivu.nasaapodarchive.cache.mapper
 
 import dev.rivu.nasaapodarchive.cache.model.ApodEntity
-import dev.rivu.nasaapodarchive.data.mapper.Mapper
+import dev.rivu.nasaapodarchive.domain.model.mapper.Mapper
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import dev.rivu.nasaapodarchive.utils.format
 import dev.rivu.nasaapodarchive.utils.parseDate

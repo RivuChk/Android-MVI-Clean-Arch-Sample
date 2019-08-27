@@ -1,6 +1,6 @@
 package dev.rivu.nasaapodarchive.remote.mapper
 
-import dev.rivu.nasaapodarchive.data.mapper.Mapper
+import dev.rivu.nasaapodarchive.domain.model.mapper.Mapper
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import dev.rivu.nasaapodarchive.remote.model.ApodResponse
 import dev.rivu.nasaapodarchive.utils.format
