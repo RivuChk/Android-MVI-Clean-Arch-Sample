@@ -4,6 +4,7 @@ object Versions {
     val retrofit = "2.6.1"
     val okHttp = "4.1.0"
     val room = "2.1.0"
+    val lifecycle = "2.0.0"
     object AndroidX {
         val appCompat = "1.0.2"
         val core = "1.0.2"
@@ -69,5 +70,11 @@ object Dependencies {
         val roomAnnotation = "androidx.room:room-compiler:${Versions.room}"
         val roomRx2 = "androidx.room:room-rxjava2:${Versions.room}"
         val roomTest = "androidx.room:room-testing:${Versions.room}"
+    }
+    val AndroidArch = object {
+        val viewModelLiveData = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+        val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
+        val livedataRx = "androidx.lifecycle:lifecycle-reactivestreams:${Versions.lifecycle}"
+        val lifecycleTesting = "androidx.arch.core:core-testing:${Versions.lifecycle}"
     }
 }

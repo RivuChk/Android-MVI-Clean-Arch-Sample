@@ -7,7 +7,7 @@ import dev.rivu.nasaapodarchive.domain.schedulers.SchedulerProvider
 import io.reactivex.Flowable
 import javax.inject.Inject
 
-class GetAPODList @Inject constructor(
+open class GetAPODList @Inject constructor(
     private val apodListRepository: APODListRepository,
     schedulerProvider: SchedulerProvider
 ) : BaseFlowableUseCase<List<APOD>, GetAPODList.Params>(schedulerProvider) {
