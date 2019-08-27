@@ -31,8 +31,6 @@ dependencies {
 
     api project(":domain")
 
-    implementation Dependencies.AndroidX.appCompat
-    implementation Dependencies.AndroidX.core
     implementation Dependencies.kotlin
 
     //Dagger

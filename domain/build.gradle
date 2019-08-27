@@ -29,8 +29,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation Dependencies.AndroidX.appCompat
-    implementation Dependencies.AndroidX.core
     implementation Dependencies.kotlin
     api Dependencies.Rx.rxJava2
     api Dependencies.Rx.rxAndroid2

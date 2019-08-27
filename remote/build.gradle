@@ -35,8 +35,6 @@ dependencies {
 
     implementation project(":data")
 
-    implementation Dependencies.AndroidX.appCompat
-    implementation Dependencies.AndroidX.core
     implementation Dependencies.kotlin
 
     //Retrofit
@@ -55,8 +53,4 @@ dependencies {
     testImplementation Dependencies.Test.mockitoKotlin
     testImplementation Dependencies.Test.hamcrest
     testImplementation Dependencies.Test.junit
-
-    testImplementation Dependencies.Test.junit
-    testImplementation Dependencies.Test.androidTestRunner
-    testImplementation Dependencies.Test.espresso
 }
