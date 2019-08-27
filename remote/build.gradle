@@ -15,16 +15,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        buildConfigField "String", "API_KEY", NASAApodKey
     }
 
     buildTypes {
         release {
-            buildConfigField "String", "API_KEY", NASAApodKey
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            buildConfigField "String", "API_KEY", NASAApodKey
         }
     }
 
