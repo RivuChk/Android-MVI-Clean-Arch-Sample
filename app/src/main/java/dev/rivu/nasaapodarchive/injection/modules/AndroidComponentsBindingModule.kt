@@ -8,5 +8,7 @@ import dev.rivu.nasaapodarchive.apodlist.ApodListFragment
 @Module
 abstract class AndroidComponentsBindingModule {
     @ContributesAndroidInjector
+    abstract fun apodListFragment(): ApodListFragment
+    @ContributesAndroidInjector
     abstract fun mainActivity(): MainActivity
 }

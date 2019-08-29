@@ -13,11 +13,20 @@ import androidx.recyclerview.widget.DiffUtil
 
 class ApodListAdapter : RecyclerView.Adapter<ApodListAdapter.ApodViewHolder>() {
 
-    private val apodItemList: List<ApodViewData> = listOf()
+    private var apodItemList: List<ApodViewData> = listOf()
+
+    fun showLoadingMore() {
+        //TODO
+    }
+
+    fun hideLoadingMore() {
+        //TODO
+    }
 
     fun updateItems(apodItemList: List<ApodViewData>) {
         val diffResult = DiffUtil.calculateDiff(MyDiffCallback(this.apodItemList, apodItemList))
         diffResult.dispatchUpdatesTo(this)
+        this.apodItemList = apodItemList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApodViewHolder {
