@@ -3,8 +3,8 @@ package dev.rivu.nasaapodarchive.remote.mapper
 import dev.rivu.nasaapodarchive.domain.model.mapper.Mapper
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import dev.rivu.nasaapodarchive.remote.model.ApodResponse
-import dev.rivu.nasaapodarchive.utils.format
-import dev.rivu.nasaapodarchive.utils.parseDate
+import dev.rivu.nasaapodarchive.domain.utils.format
+import dev.rivu.nasaapodarchive.domain.utils.parseDate
 
 open class ApodMapper: Mapper<APOD, ApodResponse> {
     override fun mapFromDomain(type: APOD): ApodResponse {

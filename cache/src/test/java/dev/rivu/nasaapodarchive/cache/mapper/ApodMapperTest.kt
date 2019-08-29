@@ -1,7 +1,7 @@
 package dev.rivu.nasaapodarchive.cache.mapper
 
 import dev.rivu.nasaapodarchive.cache.test.factory.APODFactory
-import dev.rivu.nasaapodarchive.utils.format
+import dev.rivu.nasaapodarchive.domain.utils.format
 import org.junit.Before
 import org.junit.Test
 

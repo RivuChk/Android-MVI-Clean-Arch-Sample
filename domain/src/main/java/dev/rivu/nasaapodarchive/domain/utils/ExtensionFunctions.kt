@@ -1,6 +1,5 @@
-package dev.rivu.nasaapodarchive.utils
+package dev.rivu.nasaapodarchive.domain.utils
 
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,10 +13,12 @@ fun Date.daysAgo(daysAgo: Int): Date {
 
 fun Date.format(): String {
     val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    simpleDateFormat.timeZone = TimeZone.getTimeZone("PST")
     return simpleDateFormat.format(this)
 }
 
 fun String.parseDate(): Date {
     val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    simpleDateFormat.timeZone = TimeZone.getTimeZone("PST")
     return simpleDateFormat.parse(this)
 }

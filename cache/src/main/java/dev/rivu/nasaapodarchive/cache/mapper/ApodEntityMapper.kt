@@ -3,8 +3,8 @@ package dev.rivu.nasaapodarchive.cache.mapper
 import dev.rivu.nasaapodarchive.cache.model.ApodEntity
 import dev.rivu.nasaapodarchive.domain.model.mapper.Mapper
 import dev.rivu.nasaapodarchive.domain.model.APOD
-import dev.rivu.nasaapodarchive.utils.format
-import dev.rivu.nasaapodarchive.utils.parseDate
+import dev.rivu.nasaapodarchive.domain.utils.format
+import dev.rivu.nasaapodarchive.domain.utils.parseDate
 
 open class ApodEntityMapper: Mapper<APOD, ApodEntity> {
     override fun mapFromDomain(type: APOD): ApodEntity {

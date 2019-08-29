@@ -2,7 +2,7 @@ package dev.rivu.nasaapodarchive.remote.factory
 
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import dev.rivu.nasaapodarchive.remote.model.ApodResponse
-import dev.rivu.nasaapodarchive.utils.parseDate
+import dev.rivu.nasaapodarchive.domain.utils.parseDate
 
 public object APODFactory {
 

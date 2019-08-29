@@ -2,7 +2,7 @@ package dev.rivu.nasaapodarchive.cache.androidtest.factory
 
 import dev.rivu.nasaapodarchive.cache.model.ApodEntity
 import dev.rivu.nasaapodarchive.domain.model.APOD
-import dev.rivu.nasaapodarchive.utils.parseDate
+import dev.rivu.nasaapodarchive.domain.utils.parseDate
 
 public object APODFactory {
 

@@ -3,9 +3,9 @@ package dev.rivu.nasaapodarchive.data
 import dev.rivu.nasaapodarchive.data.repository.ApodDataStore
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import dev.rivu.nasaapodarchive.domain.repository.APODListRepository
-import dev.rivu.nasaapodarchive.utils.daysAgo
-import dev.rivu.nasaapodarchive.utils.format
-import dev.rivu.nasaapodarchive.utils.parseDate
+import dev.rivu.nasaapodarchive.domain.utils.daysAgo
+import dev.rivu.nasaapodarchive.domain.utils.format
+import dev.rivu.nasaapodarchive.domain.utils.parseDate
 import io.reactivex.*
 import javax.inject.Named
 

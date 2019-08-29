@@ -1,4 +1,4 @@
-package dev.rivu.nasaapodarchive.utils
+package dev.rivu.nasaapodarchive.domain.utils
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -32,14 +32,18 @@ class UtilsTest {
 
     @Test
     fun `Date#format() should return correct date in string format`() {
-        val date = GregorianCalendar(2018, 7, 25, 0,0).time
+        val calendar = GregorianCalendar(2018, 7, 25, 0,0)
+        calendar.timeZone = TimeZone.getTimeZone("PST")
+        val date = calendar.time
         //Checking with 2018-08-25 instead of 2018-07-25, as Calendar and GregorianCalendar are 0 based in month
         assertEquals("2018-08-25", date.format())
     }
 
     @Test
     fun `String#parseDate() should return correct date in parsed in Date`() {
-        val date = GregorianCalendar(2018, 7, 25, 0,0).time
+        val calendar = GregorianCalendar(2018, 7, 25, 0,0)
+        calendar.timeZone = TimeZone.getTimeZone("PST")
+        val date = calendar.time
         //Checking with 2018-08-25 instead of 2018-07-25, as Calendar and GregorianCalendar are 0 based in month
         assertEquals(date, "2018-08-25".parseDate())
     }

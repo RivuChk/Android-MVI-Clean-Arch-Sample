@@ -1,7 +1,7 @@
 package dev.rivu.nasaapodarchive.presentation.apodlist
 
 import dev.rivu.nasaapodarchive.presentation.base.MviIntent
-import dev.rivu.nasaapodarchive.utils.format
+import dev.rivu.nasaapodarchive.domain.utils.format
 import java.util.*
 
 sealed class ApodListIntent(val startDate: String, val count: Int) : MviIntent {
