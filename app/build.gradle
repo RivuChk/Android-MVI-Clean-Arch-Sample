@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion Config.targetSdkVersion
@@ -26,11 +25,25 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(":data")
+    implementation project(":presentation")
 
     implementation Dependencies.kotlin
     implementation Dependencies.AndroidX.appCompat
     implementation Dependencies.AndroidX.core
     implementation Dependencies.AndroidX.constraintLayout
+    implementation Dependencies.AndroidX.recyclerView
+    implementation Dependencies.AndroidX.cardView
+
+    //Arch
+    implementation Dependencies.AndroidArch.viewModelLiveData
+    implementation Dependencies.AndroidArch.lifecycleRuntime
+    implementation Dependencies.AndroidArch.livedataRx
+
+    //Dagger
+    implementation Dependencies.Dagger.android
+    implementation Dependencies.Dagger.androidSupport
+    kapt Dependencies.Dagger.compiler
+    kapt Dependencies.Dagger.annotationProcessor
 
     testImplementation Dependencies.Test.junit
     androidTestImplementation Dependencies.Test.androidTestRunner

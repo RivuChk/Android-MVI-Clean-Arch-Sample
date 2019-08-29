@@ -9,6 +9,8 @@ object Versions {
         val appCompat = "1.0.2"
         val core = "1.0.2"
         val constraintLayout = "1.1.3"
+        val recyclerView = "1.0.0"
+        val cardView = "1.0.0"
     }
     object Rx {
         val rxJava2 = "2.2.11"
@@ -39,6 +41,8 @@ object Dependencies {
         val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
         val core = "androidx.core:core-ktx:${Versions.AndroidX.core}"
         val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraintLayout}"
+        val recyclerView = "androidx.recyclerview:recyclerview:${Versions.AndroidX.recyclerView}"
+        val cardView = "androidx.cardview:cardview:${Versions.AndroidX.cardView}"
     }
     val Rx = object {
         val rxJava2 = "io.reactivex.rxjava2:rxjava:${Versions.Rx.rxJava2}"
