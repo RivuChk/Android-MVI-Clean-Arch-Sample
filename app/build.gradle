@@ -57,6 +57,10 @@ dependencies {
     kapt Dependencies.Dagger.compiler
     kapt Dependencies.Dagger.annotationProcessor
 
+    //Glide
+    implementation Dependencies.Glide.glide
+    kapt Dependencies.Glide.glideCompiler
+
     testImplementation Dependencies.Test.junit
     androidTestImplementation Dependencies.Test.androidTestRunner
     androidTestImplementation Dependencies.Test.espresso

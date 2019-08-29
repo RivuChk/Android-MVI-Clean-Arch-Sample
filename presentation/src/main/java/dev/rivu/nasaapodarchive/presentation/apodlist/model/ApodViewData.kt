@@ -14,19 +14,18 @@ data class ApodViewData(
 ) {
     val imageUrl: String by lazy {
         if (mediaType is APOD.MediaType.IMAGE) {
-            if (!hdUrl.isNullOrBlank()) {
-                hdUrl
-            } else {
-                url
-            }
+            url
         } else {
-            val regExp =
-                "/^.*((youtu.be\\/)|(v\\/)|(\\/u\\/\\w\\/)|(embed\\/)|(watch\\?))\\??v?=?([^#\\&\\?]*).*/".toRegex()
-            val groups = regExp.matchEntire(url)?.groupValues
-            if (groups != null && groups.size > 7 && groups[7].length == 11) {
-                groups[7]
+            val videoId = if(url.contains("embed/")) {
+                url.substringAfter("embed/").substringBefore("?")
             } else {
                 ""
+            }
+
+            if(videoId.isNullOrBlank()) {
+                url
+            } else {
+                "https://img.youtube.com/vi/$videoId/0.jpg"
             }
         }
     }

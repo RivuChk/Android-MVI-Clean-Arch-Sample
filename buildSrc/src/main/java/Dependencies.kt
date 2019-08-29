@@ -5,6 +5,7 @@ object Versions {
     val okHttp = "4.1.0"
     val room = "2.1.0"
     val lifecycle = "2.0.0"
+    val glide = "4.9.0"
     object AndroidX {
         val appCompat = "1.0.2"
         val core = "1.0.2"
@@ -80,5 +81,9 @@ object Dependencies {
         val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
         val livedataRx = "androidx.lifecycle:lifecycle-reactivestreams:${Versions.lifecycle}"
         val lifecycleTesting = "androidx.arch.core:core-testing:${Versions.lifecycle}"
+    }
+    val Glide = object {
+        val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+        val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
     }
 }

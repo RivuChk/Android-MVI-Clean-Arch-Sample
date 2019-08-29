@@ -3,12 +3,17 @@ package dev.rivu.nasaapodarchive.apodlist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import dev.rivu.nasaapodarchive.R
 import dev.rivu.nasaapodarchive.presentation.apodlist.model.ApodViewData
 import kotlinx.android.synthetic.main.item_apod.view.*
-import androidx.recyclerview.widget.DiffUtil.DiffResult
-import androidx.recyclerview.widget.DiffUtil
 
 
 class ApodListAdapter : RecyclerView.Adapter<ApodListAdapter.ApodViewHolder>() {
@@ -38,9 +43,21 @@ class ApodListAdapter : RecyclerView.Adapter<ApodListAdapter.ApodViewHolder>() {
     override fun getItemCount(): Int = apodItemList.size
 
     override fun onBindViewHolder(holder: ApodViewHolder, position: Int) {
-        holder.itemView.tvDescription.text = apodItemList[position].explanation
+        holder.bindView(apodItemList[position])
     }
 
 
-    class ApodViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class ApodViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bindView(apodViewData: ApodViewData) {
+            Glide.with(itemView)
+                .load(apodViewData.imageUrl)
+                .apply(RequestOptions()
+                    .centerCrop()
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .error(android.R.drawable.ic_menu_close_clear_cancel))
+                .into(itemView.ivApod)
+        }
+    }
 }

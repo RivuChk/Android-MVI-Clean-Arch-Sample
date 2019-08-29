@@ -3,4 +3,7 @@
     <dimen name="text_headline">24sp</dimen>
     <dimen name="text_body">16sp</dimen>
     <dimen name="text_medium">18sp</dimen>
+    <dimen name="cardview_elevation">10dp</dimen>
+    <dimen name="apod_item_margin">8dp</dimen>
+    <dimen name="apod_image_height">200dp</dimen>
 </resources>

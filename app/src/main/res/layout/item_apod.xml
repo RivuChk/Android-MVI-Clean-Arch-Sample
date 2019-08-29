@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="15dp"
-        android:layout_margin="15dp">
+        android:layout_height="@dimen/apod_image_height"
+        android:elevation="@dimen/cardview_elevation"
+        android:layout_margin="@dimen/apod_item_margin">
 
-    <TextView
-            android:id="@+id/tvDescription"
+    <ImageView
+            android:id="@+id/ivApod"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_launcher_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 
 </androidx.cardview.widget.CardView>

@@ -3,6 +3,7 @@ package dev.rivu.nasaapodarchive.apodlist
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dev.rivu.nasaapodarchive.R
 import dev.rivu.nasaapodarchive.base.BaseFragment
@@ -42,7 +43,7 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     override fun layoutId(): Int = R.layout.fragment_apodlist
 
     override fun initView() {
-        rvApodlist.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        rvApodlist.layoutManager = GridLayoutManager(context,2, StaggeredGridLayoutManager.VERTICAL, false)
         rvApodlist.adapter = adapter
         swipeRefreshApodlist.setOnRefreshListener {
             refreshPublisher.onNext(ApodListIntent.RefreshIntent(today, 10))
