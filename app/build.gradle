@@ -34,6 +34,11 @@ dependencies {
     implementation Dependencies.Rx.rxJava2
     implementation Dependencies.Rx.rxAndroid2
 
+    //TODO: Determine why App needs Room Dependencies:: Supertypes of the following classes cannot be resolved. Please make sure you have the required dependencies in the classpath: class dev.rivu.nasaapodarchive.cache.db.AppDatabase, unresolved supertypes: androidx.room.RoomDatabase
+    implementation Dependencies.Database.room
+    implementation Dependencies.Database.roomRx2
+    kapt Dependencies.Database.roomAnnotation
+
     implementation Dependencies.kotlin
     implementation Dependencies.AndroidX.appCompat
     implementation Dependencies.AndroidX.core

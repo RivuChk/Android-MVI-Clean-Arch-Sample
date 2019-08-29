@@ -7,10 +7,11 @@ import dev.rivu.nasaapodarchive.utils.daysAgo
 import dev.rivu.nasaapodarchive.utils.format
 import dev.rivu.nasaapodarchive.utils.parseDate
 import io.reactivex.*
+import javax.inject.Named
 
 class APODListRepositoryImpl(
-    private val cachedDataStore: ApodDataStore,
-    private val remoteDataStore: ApodDataStore
+    @Named("cache") private val cachedDataStore: ApodDataStore,
+    @Named("remote") private val remoteDataStore: ApodDataStore
 ) : APODListRepository {
     override fun getApod(date: String): Single<APOD> {
         return cachedDataStore
