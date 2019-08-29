@@ -5,6 +5,7 @@ import dev.rivu.nasaapodarchive.presentation.base.MviState
 
 data class ApodListState(
     val isLoading: Boolean = false,
+    val isLoadingMore: Boolean = false,
     val apodList: List<ApodViewData> = emptyList(),
     val isError: Boolean = false,
     val errorMessage: String = "",

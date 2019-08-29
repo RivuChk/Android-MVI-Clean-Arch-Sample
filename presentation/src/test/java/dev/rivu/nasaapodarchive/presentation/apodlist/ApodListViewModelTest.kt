@@ -148,7 +148,7 @@ class ApodListViewModelTest {
         verify(mockStateObserver, times(1))
             .onChanged(
                 ApodListState(//Loading State Update
-                    isLoading = true,
+                    isLoadingMore = true,
                     isError = false,
                     errorMessage = ""
                 )
@@ -156,7 +156,7 @@ class ApodListViewModelTest {
         verify(mockStateObserver, times(1))
             .onChanged(
                 ApodListState(//Success State Update
-                    isLoading = false,
+                    isLoadingMore = false,
                     isError = false,
                     errorMessage = "",
                     apodList = viewList,

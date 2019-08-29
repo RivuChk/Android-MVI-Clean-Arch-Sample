@@ -65,7 +65,7 @@ class ApodListViewModel @Inject constructor(
                 }
                 is ApodListResult.LoadMoreResult.Success -> {
                     previousState.copy(
-                        isLoading = false,
+                        isLoadingMore = false,
                         isError = false,
                         errorMessage = "",
                         apodList = previousState.apodList + result.apodList.map(apodViewMapper::mapFromDomain),
@@ -74,23 +74,20 @@ class ApodListViewModel @Inject constructor(
                 }
                 is ApodListResult.LoadMoreResult.Failure -> {
                     previousState.copy(
-                        isLoading = false,
+                        isLoadingMore = false,
                         isError = true,
                         errorMessage = result.errorMessage
                     )
                 }
                 is ApodListResult.LoadMoreResult.InProgress -> {
                     previousState.copy(
-                        isLoading = true,
                         isError = false,
+                        isLoadingMore = true,
                         errorMessage = ""
                     )
                 }
                 is ApodListResult.ClickResult -> {
                     previousState.copy(
-                        isLoading = false,
-                        isError = false,
-                        errorMessage = "",
                         detailDate = result.date
                     )
                 }
