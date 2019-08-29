@@ -37,9 +37,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(":domain")
     implementation project(":data")
 
     implementation Dependencies.kotlin
+
+    //Rx
+    implementation Dependencies.Rx.rxJava2
+    implementation Dependencies.Rx.rxAndroid2
 
     //room
     implementation Dependencies.Database.room

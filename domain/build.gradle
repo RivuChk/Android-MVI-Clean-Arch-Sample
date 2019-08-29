@@ -30,8 +30,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Dependencies.kotlin
-    api Dependencies.Rx.rxJava2
-    api Dependencies.Rx.rxAndroid2
+
+    //Rx
+    implementation Dependencies.Rx.rxJava2
+    implementation Dependencies.Rx.rxAndroid2
 
     //Dagger
     implementation Dependencies.Dagger.android

@@ -28,6 +28,11 @@ dependencies {
     implementation project(":domain")
 
     implementation Dependencies.kotlin
+
+    //Rx
+    implementation Dependencies.Rx.rxJava2
+    implementation Dependencies.Rx.rxAndroid2
+
     implementation Dependencies.AndroidX.appCompat
     implementation Dependencies.AndroidX.core
     implementation Dependencies.AndroidX.constraintLayout

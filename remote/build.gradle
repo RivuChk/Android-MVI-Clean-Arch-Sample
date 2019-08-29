@@ -31,8 +31,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(":data")
+    implementation project(":domain")
 
     implementation Dependencies.kotlin
+
+    //Rx
+    implementation Dependencies.Rx.rxJava2
+    implementation Dependencies.Rx.rxAndroid2
 
     //Retrofit
     implementation Dependencies.Network.retrofit
