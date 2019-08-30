@@ -10,9 +10,13 @@ class ApdListViewModelFactory @Inject constructor(
     private val actionProcessor: ApodListProcessor,
     private val apodViewMapper: ApodViewMapper
 ): ViewModelProvider.Factory {
+    private lateinit var apodListViewModel: ApodListViewModel
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass == ApodListViewModel::class.java) {
-            return ApodListViewModel(actionProcessor, apodViewMapper) as T
+            if (!::apodListViewModel.isInitialized) {
+                apodListViewModel = ApodListViewModel(actionProcessor, apodViewMapper)
+            }
+            return apodListViewModel as T
         } else {
             throw UnsupportedOperationException("ApdListViewModelFactory can only produce ApodListViewModel")
         }
