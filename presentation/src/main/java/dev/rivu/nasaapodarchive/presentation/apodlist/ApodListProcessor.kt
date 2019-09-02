@@ -16,7 +16,8 @@ open class ApodListProcessor @Inject constructor(private val usecase: GetAPODLis
                 Flowable.merge(
                     shared.ofType(ApodListAction.Load::class.java).compose(loadApods()),
                     shared.ofType(ApodListAction.LoadMore::class.java).compose(loadMoreApods()),
-                    shared.ofType(ApodListAction.Click::class.java).compose(click())
+                    shared.ofType(ApodListAction.Click::class.java).compose(click()),
+                    shared.ofType(ApodListAction.ClearClick::class.java).compose(clearClick())
                 )
             }
         }
@@ -55,6 +56,13 @@ open class ApodListProcessor @Inject constructor(private val usecase: GetAPODLis
         FlowableTransformer { action ->
             action.flatMap { clickAction ->
                 Flowable.just(ApodListResult.ClickResult(clickAction.date))
+            }
+        }
+
+    private fun clearClick(): FlowableTransformer<ApodListAction.ClearClick, ApodListResult.ClearResult> =
+        FlowableTransformer { action ->
+            action.flatMap { clickAction ->
+                Flowable.just(ApodListResult.ClearResult)
             }
         }
 }

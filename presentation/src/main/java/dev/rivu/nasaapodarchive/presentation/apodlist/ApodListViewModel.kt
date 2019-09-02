@@ -32,7 +32,10 @@ class ApodListViewModel @Inject constructor(
                 ApodListAction.LoadMore(intent.startDate, intent.count)
             }
             is ApodListIntent.ClickIntent -> {
-                ApodListAction.Click(intent.date)
+                ApodListAction.Click(intent.clickedViewPosition, intent.date)
+            }
+            is ApodListIntent.ClearClickIntent -> {
+                ApodListAction.ClearClick
             }
         }
     }
@@ -89,6 +92,12 @@ class ApodListViewModel @Inject constructor(
                 is ApodListResult.ClickResult -> {
                     previousState.copy(
                         detailDate = result.date
+                    )
+                }
+                is ApodListResult.ClearResult -> {
+                    previousState.copy(
+                        detailDate = "",
+                        clickedViewPosition = 0
                     )
                 }
             }

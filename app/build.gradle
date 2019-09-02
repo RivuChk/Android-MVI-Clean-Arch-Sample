@@ -44,6 +44,8 @@ dependencies {
     implementation Dependencies.AndroidX.core
     implementation Dependencies.AndroidX.constraintLayout
     implementation Dependencies.AndroidX.recyclerView
+    implementation Dependencies.AndroidX.legacySupport
+    implementation Dependencies.AndroidX.material
     implementation Dependencies.AndroidX.cardView
 
     //Arch

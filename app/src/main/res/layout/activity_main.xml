@@ -8,11 +8,11 @@
         tools:context=".MainActivity">
 
 
-    <fragment
-            android:id="@+id/fragment"
+    <LinearLayout
+            android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:name="dev.rivu.nasaapodarchive.apodlist.ApodListFragment"
-            tools:layout="@layout/fragment_apodlist"/>
+            android:orientation="vertical"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

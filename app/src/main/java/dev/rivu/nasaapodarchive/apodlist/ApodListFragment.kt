@@ -1,19 +1,20 @@
 package dev.rivu.nasaapodarchive.apodlist
 
-import android.widget.Toast
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dev.rivu.nasaapodarchive.R
 import dev.rivu.nasaapodarchive.base.BaseFragment
+import dev.rivu.nasaapodarchive.domain.utils.format
 import dev.rivu.nasaapodarchive.presentation.apodlist.ApdListViewModelFactory
 import dev.rivu.nasaapodarchive.presentation.apodlist.ApodListIntent
 import dev.rivu.nasaapodarchive.presentation.apodlist.ApodListState
 import dev.rivu.nasaapodarchive.presentation.apodlist.ApodListViewModel
+import dev.rivu.nasaapodarchive.presentation.apodlist.model.ApodViewData
 import dev.rivu.nasaapodarchive.presentation.base.MviView
-import dev.rivu.nasaapodarchive.domain.utils.format
+import dev.rivu.nasaapodarchive.utils.get
 import dev.rivu.nasaapodarchive.utils.gone
 import dev.rivu.nasaapodarchive.utils.isVisible
 import dev.rivu.nasaapodarchive.utils.visible
@@ -25,14 +26,20 @@ import javax.inject.Inject
 
 class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> {
 
+    var showApodImageDetail: (view: View, apodViewData: ApodViewData) -> Unit = { _, _ -> }
+
     @Inject
     lateinit var viewModelFactory: ApdListViewModelFactory
 
     private val refreshPublisher: PublishSubject<ApodListIntent.RefreshIntent> = PublishSubject.create()
+    private val clickPublisher: PublishSubject<ApodListIntent.ClickIntent> = PublishSubject.create()
+    private val clearClickPublisher: PublishSubject<ApodListIntent.ClearClickIntent> = PublishSubject.create()
 
-    val adapter by lazy {
-        ApodListAdapter()
+    private val adapter by lazy {
+        ApodListAdapter(::onApodClick)
     }
+
+    private lateinit var layoutManager: GridLayoutManager
 
     var today: String = Calendar.getInstance().time.format()
 
@@ -44,15 +51,29 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     override fun layoutId(): Int = R.layout.fragment_apodlist
 
     override fun initView() {
-        rvApodlist.layoutManager = GridLayoutManager(context,2, RecyclerView.VERTICAL, false)
+        layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+        rvApodlist.layoutManager = layoutManager
         rvApodlist.adapter = adapter
         swipeRefreshApodlist.setOnRefreshListener {
             refreshPublisher.onNext(ApodListIntent.RefreshIntent(today, 10))
         }
     }
 
-    override fun bind() {
+    private fun onApodClick(clickedViewPosition: Int, apodViewData: ApodViewData) {
+        clickPublisher.onNext(
+            ApodListIntent.ClickIntent(
+                clickedViewPosition = clickedViewPosition,
+                date = apodViewData.date.format()
+            )
+        )
+    }
 
+    private fun showImageDetailsAndClear(view: View, apodViewData: ApodViewData) {
+        showApodImageDetail(view, apodViewData)
+        clearClickPublisher.onNext(ApodListIntent.ClearClickIntent)
+    }
+
+    override fun bind() {
         apodListViewModel.states()
             .observe(this, Observer<ApodListState> { state ->
                 render(state)
@@ -61,12 +82,17 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     }
 
     override fun intents(): Observable<ApodListIntent> {
-        return Observable.merge(Observable.just(ApodListIntent.InitialIntent(today, 10)), refreshPublisher.hide())
+        return Observable.merge(
+            Observable.just(ApodListIntent.InitialIntent(today, 10)),
+            refreshPublisher.hide(),
+            clickPublisher.hide(),
+            clearClickPublisher.hide()
+        )
     }
 
     private fun showLoading() {
         hideErrorView()
-        if(swipeRefreshApodlist.isVisible()) {
+        if (swipeRefreshApodlist.isVisible()) {
             swipeRefreshApodlist.isRefreshing = true
         } else {
             progress.visible()
@@ -75,7 +101,7 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     }
 
     private fun hideLoading() {
-        if(swipeRefreshApodlist.isVisible()) {
+        if (swipeRefreshApodlist.isVisible()) {
             swipeRefreshApodlist.isRefreshing = false
         } else {
             progress.gone()
@@ -90,33 +116,37 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     }
 
     private fun hideErrorView() {
-        if(errorView.isVisible()) {
+        if (errorView.isVisible()) {
             errorView.gone()
         }
     }
 
     override fun render(state: ApodListState) {
-        if(state.isLoading) {
+        if (state.isLoading) {
             showLoading()
+            return
         } else {
             hideLoading()
         }
-        if(state.isError) {
+        if (state.isError) {
             showError(state.errorMessage)
+            return
         } else {
             hideErrorView()
         }
-        if(state.isLoadingMore) {
+        if (state.isLoadingMore) {
             adapter.showLoadingMore()
         } else {
             adapter.hideLoadingMore()
         }
-        if(state.apodList.isNotEmpty()) {
+        if (state.apodList.isNotEmpty()) {
             adapter.updateItems(apodItemList = state.apodList)
         }
-        if(!state.detailDate.isNullOrBlank()) {
-            //TODO: Detail Screen
-            Toast.makeText(context, state.detailDate, Toast.LENGTH_LONG).show()
+        if (!state.detailDate.isBlank()) {
+            showImageDetailsAndClear(
+                layoutManager.findViewByPosition(state.clickedViewPosition)!!,
+                state.apodList[state.detailDate]!!
+            )
         }
     }
 }

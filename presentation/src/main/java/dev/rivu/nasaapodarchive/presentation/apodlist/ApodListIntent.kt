@@ -1,7 +1,7 @@
 package dev.rivu.nasaapodarchive.presentation.apodlist
 
-import dev.rivu.nasaapodarchive.presentation.base.MviIntent
 import dev.rivu.nasaapodarchive.domain.utils.format
+import dev.rivu.nasaapodarchive.presentation.base.MviIntent
 import java.util.*
 
 sealed class ApodListIntent(val startDate: String, val count: Int) : MviIntent {
@@ -9,5 +9,6 @@ sealed class ApodListIntent(val startDate: String, val count: Int) : MviIntent {
     class LoadIntent(startDate: String, count: Int) : ApodListIntent(startDate, count)
     class RefreshIntent(startDate: String, count: Int) : ApodListIntent(startDate, count)
     class LoadMoreIntent(startDate: String, count: Int) : ApodListIntent(startDate, count)
-    data class ClickIntent(val date: String) : ApodListIntent("", 0)
+    data class ClickIntent(val clickedViewPosition: Int, val date: String) : ApodListIntent("", 0)
+    object ClearClickIntent : ApodListIntent("", 0)
 }

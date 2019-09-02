@@ -8,7 +8,7 @@ import dev.rivu.nasaapodarchive.domain.utils.parseDate
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-data class ApodViewData(
+data class ApodPresenterData(
     val date: Date,
     val explanation: String,
     val mediaType: APOD.MediaType,
@@ -59,12 +59,12 @@ data class ApodViewData(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<ApodViewData> {
-        override fun createFromParcel(parcel: Parcel): ApodViewData {
-            return ApodViewData(parcel)
+    companion object CREATOR : Parcelable.Creator<ApodPresenterData> {
+        override fun createFromParcel(parcel: Parcel): ApodPresenterData {
+            return ApodPresenterData(parcel)
         }
 
-        override fun newArray(size: Int): Array<ApodViewData?> {
+        override fun newArray(size: Int): Array<ApodPresenterData?> {
             return arrayOfNulls(size)
         }
     }

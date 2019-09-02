@@ -6,4 +6,6 @@
     <dimen name="cardview_elevation">10dp</dimen>
     <dimen name="apod_item_margin">8dp</dimen>
     <dimen name="apod_image_height">200dp</dimen>
+    <dimen name="list_item_spacing">16dp</dimen>
+    <dimen name="list_item_spacing_half">8dp</dimen>
 </resources>

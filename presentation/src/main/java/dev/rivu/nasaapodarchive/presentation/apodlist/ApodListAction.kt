@@ -9,5 +9,7 @@ sealed class ApodListAction: MviAction {
     data class LoadMore(val startDate: String, val count: Int) :
         ApodListAction()//Should be used for all 3, Load, Reload
 
-    data class Click(val date: String): ApodListAction()
+    data class Click(val clickedViewPosition: Int, val date: String): ApodListAction()
+
+    object ClearClick: ApodListAction()
 }

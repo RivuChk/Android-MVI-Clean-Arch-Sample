@@ -1,5 +1,6 @@
 package dev.rivu.nasaapodarchive.presentation.apodlist
 
+import android.view.View
 import dev.rivu.nasaapodarchive.presentation.apodlist.model.ApodViewData
 import dev.rivu.nasaapodarchive.presentation.base.MviState
 
@@ -9,7 +10,8 @@ data class ApodListState(
     val apodList: List<ApodViewData> = emptyList(),
     val isError: Boolean = false,
     val errorMessage: String = "",
-    val detailDate: String = ""
+    val detailDate: String = "",
+    val clickedViewPosition: Int = 0
 ): MviState {
     companion object {
         @JvmStatic

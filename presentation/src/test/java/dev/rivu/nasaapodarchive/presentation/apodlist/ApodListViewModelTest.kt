@@ -198,7 +198,7 @@ class ApodListViewModelTest {
 
         val date = DataFactory.randomString()
 
-        viewModel.processIntents(Observable.just(ApodListIntent.ClickIntent(date)))
+        viewModel.processIntents(Observable.just(ApodListIntent.ClickIntent(0,date)))
         verify(mockStateObserver, times(1))
             .onChanged(
                 ApodListState(//Loading State Update
@@ -206,6 +206,40 @@ class ApodListViewModelTest {
                     isError = false,
                     errorMessage = "",
                     detailDate = date
+                )
+            )
+    }
+
+    @Test
+    fun `test Clear Click intent`() {
+        val list = APODFactory.makeApods(2)
+        val viewList = APODFactory.makeApodViews(2)
+
+        stubMapper(viewList[0], list[0])
+        stubMapper(viewList[1], list[1])
+        stubGetAPODList(Flowable.just(list))
+
+        val date = DataFactory.randomString()
+
+        viewModel.processIntents(Observable.just(ApodListIntent.ClickIntent(0,date)))
+        verify(mockStateObserver, times(1))
+            .onChanged(
+                ApodListState(//Loading State Update
+                    isLoading = false,
+                    isError = false,
+                    errorMessage = "",
+                    detailDate = date
+                )
+            )
+
+        viewModel.processIntents(Observable.just(ApodListIntent.ClearClickIntent))
+        verify(mockStateObserver, times(1))
+            .onChanged(
+                ApodListState(//Loading State Update
+                    isLoading = false,
+                    isError = false,
+                    errorMessage = "",
+                    detailDate = ""
                 )
             )
     }
