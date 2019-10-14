@@ -16,24 +16,27 @@ data class ApodViewData(
     val url: String,
     val hdUrl: String? = null,
     val copyright: String? = null
-): Parcelable {
+) : Parcelable {
     val imageUrl: String by lazy {
         if (mediaType is APOD.MediaType.IMAGE) {
             url
         } else {
-            val videoId = if(url.contains("embed/")) {
+            val videoId = if (url.contains("embed/")) {
                 url.substringAfter("embed/").substringBefore("?")
             } else {
                 ""
             }
 
-            if(videoId.isNullOrBlank()) {
+            if (videoId.isNullOrBlank()) {
                 url
             } else {
                 "https://img.youtube.com/vi/$videoId/0.jpg"
             }
         }
     }
+
+    val dateStr: String
+        get() = date.format()
 
     constructor(parcel: Parcel) : this(
         parcel.readString().parseDate(),

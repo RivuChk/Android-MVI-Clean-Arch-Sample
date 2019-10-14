@@ -114,7 +114,14 @@ class ApodListViewModelTest {
         stubMapper(viewList[1], list[1])
         stubGetAPODList(Flowable.just(list))
 
-        viewModel.processIntents(Observable.just(ApodListIntent.RefreshIntent(anyString(), anyInt())))
+        viewModel.processIntents(
+            Observable.just(
+                ApodListIntent.RefreshIntent(
+                    anyString(),
+                    anyInt()
+                )
+            )
+        )
         verify(mockStateObserver, times(1))
             .onChanged(
                 ApodListState(//Loading State Update
@@ -144,7 +151,14 @@ class ApodListViewModelTest {
         stubMapper(viewList[1], list[1])
         stubGetAPODList(Flowable.just(list))
 
-        viewModel.processIntents(Observable.just(ApodListIntent.LoadMoreIntent(anyString(), anyInt())))
+        viewModel.processIntents(
+            Observable.just(
+                ApodListIntent.LoadMoreIntent(
+                    anyString(),
+                    anyInt()
+                )
+            )
+        )
         verify(mockStateObserver, times(1))
             .onChanged(
                 ApodListState(//Loading State Update
@@ -198,14 +212,15 @@ class ApodListViewModelTest {
 
         val date = DataFactory.randomString()
 
-        viewModel.processIntents(Observable.just(ApodListIntent.ClickIntent(0,date)))
+        viewModel.processIntents(Observable.just(ApodListIntent.ClickIntent(0, date)))
         verify(mockStateObserver, times(1))
             .onChanged(
                 ApodListState(//Loading State Update
                     isLoading = false,
                     isError = false,
                     errorMessage = "",
-                    detailDate = date
+                    detailDate = date,
+                    clickedViewPosition = 0
                 )
             )
     }
@@ -221,14 +236,15 @@ class ApodListViewModelTest {
 
         val date = DataFactory.randomString()
 
-        viewModel.processIntents(Observable.just(ApodListIntent.ClickIntent(0,date)))
+        viewModel.processIntents(Observable.just(ApodListIntent.ClickIntent(0, date)))
         verify(mockStateObserver, times(1))
             .onChanged(
                 ApodListState(//Loading State Update
                     isLoading = false,
                     isError = false,
                     errorMessage = "",
-                    detailDate = date
+                    detailDate = "",
+                    clickedViewPosition = -1
                 )
             )
 
@@ -244,8 +260,10 @@ class ApodListViewModelTest {
             )
     }
 
-    private fun stubMapper(apodView: ApodViewData,
-                                            apod: APOD) {
+    private fun stubMapper(
+        apodView: ApodViewData,
+        apod: APOD
+    ) {
         whenever(mockApodViewMapper.mapFromDomain(apod))
             .thenReturn(apodView)
         whenever(mockApodViewMapper.mapToDomain(apodView))

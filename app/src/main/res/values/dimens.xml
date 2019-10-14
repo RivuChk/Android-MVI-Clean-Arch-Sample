@@ -8,4 +8,7 @@
     <dimen name="apod_image_height">200dp</dimen>
     <dimen name="list_item_spacing">16dp</dimen>
     <dimen name="list_item_spacing_half">8dp</dimen>
+
+    <dimen name="body_text_size">16sp</dimen>
+    <dimen name="apod_header_title_height">80dp</dimen>
 </resources>

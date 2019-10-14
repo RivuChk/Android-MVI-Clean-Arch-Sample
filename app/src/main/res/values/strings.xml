@@ -3,4 +3,8 @@
     <string name="error_title">Oops!</string>
     <string name="error_message">There was a problem loading the pokemon, please try again!</string>
     <string name="error_reload">Reload</string>
+    <string name="apod_detail_header">APOD %s</string>
+    <string name="label_title">Title:</string>
+    <string name="label_explanation">Explanation:</string>
+    <string name="label_copyright">Copyright:</string>
 </resources>

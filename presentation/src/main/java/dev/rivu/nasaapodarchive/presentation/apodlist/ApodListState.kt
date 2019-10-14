@@ -11,7 +11,7 @@ data class ApodListState(
     val isError: Boolean = false,
     val errorMessage: String = "",
     val detailDate: String = "",
-    val clickedViewPosition: Int = 0
+    val clickedViewPosition: Int = -1
 ): MviState {
     companion object {
         @JvmStatic

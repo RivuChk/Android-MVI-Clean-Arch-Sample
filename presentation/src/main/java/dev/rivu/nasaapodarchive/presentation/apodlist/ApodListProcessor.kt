@@ -55,7 +55,12 @@ open class ApodListProcessor @Inject constructor(private val usecase: GetAPODLis
     private fun click(): FlowableTransformer<ApodListAction.Click, ApodListResult.ClickResult> =
         FlowableTransformer { action ->
             action.flatMap { clickAction ->
-                Flowable.just(ApodListResult.ClickResult(clickAction.date))
+                Flowable.just(
+                    ApodListResult.ClickResult(
+                        clickAction.clickedViewPosition,
+                        clickAction.date
+                    )
+                )
             }
         }
 

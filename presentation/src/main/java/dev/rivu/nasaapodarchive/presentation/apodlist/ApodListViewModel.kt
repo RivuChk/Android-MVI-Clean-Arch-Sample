@@ -91,13 +91,14 @@ class ApodListViewModel @Inject constructor(
                 }
                 is ApodListResult.ClickResult -> {
                     previousState.copy(
-                        detailDate = result.date
+                        detailDate = result.date,
+                        clickedViewPosition = result.clickedViewPosition
                     )
                 }
                 is ApodListResult.ClearResult -> {
                     previousState.copy(
                         detailDate = "",
-                        clickedViewPosition = 0
+                        clickedViewPosition = -1
                     )
                 }
             }

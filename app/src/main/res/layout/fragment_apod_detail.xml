@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".apoddetails.ApodDetailFragment">
@@ -10,29 +9,117 @@
     <ImageView
             android:id="@+id/ivApod"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            app:behavior_hideable="false"
-            app:behavior_peekHeight="80dp"
+            android:layout_height="wrap_content"
+            app:behavior_peekHeight="@dimen/apod_header_title_height"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            android:orientation="vertical">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:text="Header"
-                android:textColor="@android:color/white"/>
+            android:background="@color/white">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Content"
-                android:textColor="@android:color/white"/>
-    </LinearLayout>
+                android:layout_height="wrap_content"
+                app:behavior_hideable="false">
+
+            <TextView
+                    android:id="@+id/tvApodDetailHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/apod_header_title_height"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:padding="@dimen/list_item_spacing"
+                    android:text="@string/apod_detail_header"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="APOD 2019/12/28" />
+
+            <TextView
+                    android:id="@+id/lblApodTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/list_item_spacing"
+                    android:gravity="center"
+                    android:text="@string/label_title"
+                    android:textAppearance="@style/TextAppearanceBodyBold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvApodDetailHeader" />
+
+            <TextView
+                    android:id="@+id/tvApodTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/list_item_spacing"
+                    android:layout_marginEnd="@dimen/list_item_spacing"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:lines="1"
+                    android:textAppearance="@style/TextAppearanceBody"
+                    app:layout_constraintBottom_toBottomOf="@+id/lblApodTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/lblApodTitle"
+                    app:layout_constraintTop_toTopOf="@+id/lblApodTitle"
+                    tools:text="Apod Title" />
+
+            <TextView
+                    android:id="@+id/lblApodExplanation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/list_item_spacing"
+                    android:gravity="center"
+                    android:text="@string/label_explanation"
+                    android:textAppearance="@style/TextAppearanceBodyBold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblApodTitle" />
+
+            <TextView
+                    android:id="@+id/tvApodExplanation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/list_item_spacing"
+                    android:layout_marginEnd="@dimen/list_item_spacing"
+                    android:gravity="top|start"
+                    android:minLines="2"
+                    android:textAppearance="@style/TextAppearanceBody"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/lblApodExplanation"
+                    app:layout_constraintTop_toTopOf="@+id/lblApodExplanation"
+                    tools:text="Apod Explanation" />
+
+
+            <TextView
+                    android:id="@+id/lblApodCopyright"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/list_item_spacing"
+                    android:gravity="center"
+                    android:text="@string/label_copyright"
+                    android:textAppearance="@style/TextAppearanceBodyBold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvApodExplanation" />
+
+            <TextView
+                    android:id="@+id/tvApodCopyright"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/list_item_spacing"
+                    android:layout_marginEnd="@dimen/list_item_spacing"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:lines="1"
+                    android:textAppearance="@style/TextAppearanceBody"
+                    app:layout_constraintBottom_toBottomOf="@+id/lblApodCopyright"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/lblApodCopyright"
+                    app:layout_constraintTop_toTopOf="@+id/lblApodCopyright"
+                    tools:text="Apod Copyright" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

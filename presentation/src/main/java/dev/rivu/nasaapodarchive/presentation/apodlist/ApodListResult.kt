@@ -14,7 +14,7 @@ sealed class ApodListResult: MviResult {
         data class Failure(val errorMessage: String): LoadMoreResult()
         object InProgress: LoadMoreResult()
     }
-    data class ClickResult(val date: String): ApodListResult()
+    data class ClickResult(val clickedViewPosition: Int, val date: String): ApodListResult()
 
     object ClearResult: ApodListResult()
 }

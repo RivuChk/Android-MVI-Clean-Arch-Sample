@@ -142,7 +142,7 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
         if (state.apodList.isNotEmpty()) {
             adapter.updateItems(apodItemList = state.apodList)
         }
-        if (!state.detailDate.isBlank()) {
+        if (!state.detailDate.isBlank() && state.clickedViewPosition in state.apodList.indices) {
             showImageDetailsAndClear(
                 layoutManager.findViewByPosition(state.clickedViewPosition)!!,
                 state.apodList[state.detailDate]!!
