@@ -5,7 +5,6 @@ import android.os.Parcelable
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import dev.rivu.nasaapodarchive.domain.utils.format
 import dev.rivu.nasaapodarchive.domain.utils.parseDate
-import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 data class ApodPresenterData(

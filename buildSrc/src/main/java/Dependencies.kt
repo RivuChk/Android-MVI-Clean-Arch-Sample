@@ -1,4 +1,5 @@
 object Versions {
+    val gradle = "3.5.2"
     val kotlin = "1.3.50"
     val dagger = "2.20"
     val retrofit = "2.6.1"
@@ -39,9 +40,14 @@ object Config {
     val versionName = "1.0"
 }
 
+object BuildScript {
+    val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
+    val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+}
+
 object Dependencies {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    val AndroidX = object {
+    object AndroidX {
         val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
         val core = "androidx.core:core-ktx:${Versions.AndroidX.core}"
         val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraintLayout}"
@@ -50,17 +56,17 @@ object Dependencies {
         val legacySupport = "androidx.legacy:legacy-support-v4:${Versions.AndroidX.legacySupport}"
         val material = "com.google.android.material:material:${Versions.AndroidX.material}"
     }
-    val Rx = object {
+    object Rx {
         val rxJava2 = "io.reactivex.rxjava2:rxjava:${Versions.Rx.rxJava2}"
         val rxAndroid2 = "io.reactivex.rxjava2:rxandroid:${Versions.Rx.rxAndroid2}"
     }
-    val Dagger = object {
+    object Dagger {
         val android = "com.google.dagger:dagger-android:${Versions.dagger}"
         val androidSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
         val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
         val annotationProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
     }
-    val Test = object {
+    object Test {
         val junit = "junit:junit:${Versions.Test.junit}"
         val androidTestRunner = "androidx.test:runner:${Versions.Test.androidTestRunner}"
         val espresso = "androidx.test.espresso:espresso-core:${Versions.Test.espresso}"
@@ -69,29 +75,29 @@ object Dependencies {
         val hamcrest = "org.hamcrest:hamcrest-all:${Versions.Test.hamcrest}"
         val androidxTestExt = "androidx.test.ext:junit:${Versions.Test.androidxTestExt}"
     }
-    val Network = object {
+    object Network {
         val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         val okHttp = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
         val rxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
         val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     }
-    val Database = object {
+    object Database {
         val room = "androidx.room:room-runtime:${Versions.room}"
         val roomAnnotation = "androidx.room:room-compiler:${Versions.room}"
         val roomRx2 = "androidx.room:room-rxjava2:${Versions.room}"
         val roomTest = "androidx.room:room-testing:${Versions.room}"
     }
-    val AndroidArch = object {
+    object AndroidArch {
         val viewModelLiveData = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
         val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
         val livedataRx = "androidx.lifecycle:lifecycle-reactivestreams:${Versions.lifecycle}"
         val lifecycleTesting = "androidx.arch.core:core-testing:${Versions.lifecycle}"
     }
-    val Glide = object {
+    object Glide {
         val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
         val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
     }
-    val RxBinding = object {
+    object RxBinding {
         val core = "com.jakewharton.rxbinding3:rxbinding-core:${Versions.Rx.rxBinding}"
         val recyclerview = "com.jakewharton.rxbinding3:rxbinding-recyclerview:${Versions.Rx.rxBinding}"
         val swiperefreshlayout = "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:${Versions.Rx.rxBinding}"
