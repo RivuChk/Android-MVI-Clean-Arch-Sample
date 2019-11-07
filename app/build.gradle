@@ -66,4 +66,9 @@ dependencies {
     testImplementation Dependencies.Test.junit
     androidTestImplementation Dependencies.Test.androidTestRunner
     androidTestImplementation Dependencies.Test.espresso
+
+    //RxBinding
+    implementation Dependencies.RxBinding.core
+    implementation Dependencies.RxBinding.recyclerview
+    implementation Dependencies.RxBinding.swiperefreshlayout
 }

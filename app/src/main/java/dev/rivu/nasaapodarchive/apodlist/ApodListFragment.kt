@@ -5,6 +5,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jakewharton.rxbinding3.swiperefreshlayout.refreshes
+import com.jakewharton.rxbinding3.view.detaches
 import dev.rivu.nasaapodarchive.R
 import dev.rivu.nasaapodarchive.base.BaseFragment
 import dev.rivu.nasaapodarchive.domain.utils.format
@@ -31,12 +33,13 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     @Inject
     lateinit var viewModelFactory: ApdListViewModelFactory
 
-    private val refreshPublisher: PublishSubject<ApodListIntent.RefreshIntent> = PublishSubject.create()
-    private val clickPublisher: PublishSubject<ApodListIntent.ClickIntent> = PublishSubject.create()
-    private val clearClickPublisher: PublishSubject<ApodListIntent.ClearClickIntent> = PublishSubject.create()
+    private val clearClickPublisher: PublishSubject<ApodListIntent.ClearClickIntent> by lazy {
+        PublishSubject.create<ApodListIntent.ClearClickIntent>()
+    }
+
 
     private val adapter by lazy {
-        ApodListAdapter(::onApodClick)
+        ApodListAdapter()
     }
 
     private lateinit var layoutManager: GridLayoutManager
@@ -54,18 +57,6 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
         layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
         rvApodlist.layoutManager = layoutManager
         rvApodlist.adapter = adapter
-        swipeRefreshApodlist.setOnRefreshListener {
-            refreshPublisher.onNext(ApodListIntent.RefreshIntent(today, 10))
-        }
-    }
-
-    private fun onApodClick(clickedViewPosition: Int, apodViewData: ApodViewData) {
-        clickPublisher.onNext(
-            ApodListIntent.ClickIntent(
-                clickedViewPosition = clickedViewPosition,
-                date = apodViewData.date.format()
-            )
-        )
     }
 
     private fun showImageDetailsAndClear(view: View, apodViewData: ApodViewData) {
@@ -84,9 +75,18 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     override fun intents(): Observable<ApodListIntent> {
         return Observable.merge(
             Observable.just(ApodListIntent.InitialIntent(today, 10)),
-            refreshPublisher.hide(),
-            clickPublisher.hide(),
-            clearClickPublisher.hide()
+            swipeRefreshApodlist.refreshes().map {
+                ApodListIntent.RefreshIntent(today, 10)
+            },
+            adapter.clickEvent
+                .map { clickData ->
+                    ApodListIntent.ClickIntent(
+                        clickedViewPosition = clickData.position,
+                        date = clickData.apodViewData.date.format()
+                    )
+                }
+                .takeUntil(rvApodlist.detaches()),
+            clearClickPublisher
         )
     }
 

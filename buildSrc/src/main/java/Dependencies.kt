@@ -18,6 +18,7 @@ object Versions {
     object Rx {
         val rxJava2 = "2.2.11"
         val rxAndroid2 = "2.1.1"
+        val rxBinding = "3.0.0"
     }
     object Test {
         val junit = "4.12"
@@ -89,5 +90,10 @@ object Dependencies {
     val Glide = object {
         val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
         val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+    }
+    val RxBinding = object {
+        val core = "com.jakewharton.rxbinding3:rxbinding-core:${Versions.Rx.rxBinding}"
+        val recyclerview = "com.jakewharton.rxbinding3:rxbinding-recyclerview:${Versions.Rx.rxBinding}"
+        val swiperefreshlayout = "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:${Versions.Rx.rxBinding}"
     }
 }

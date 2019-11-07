@@ -6,22 +6,24 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
+import com.jakewharton.rxbinding3.view.clicks
 import dev.rivu.nasaapodarchive.R
 import dev.rivu.nasaapodarchive.domain.utils.format
 import dev.rivu.nasaapodarchive.presentation.apodlist.model.ApodViewData
 import dev.rivu.nasaapodarchive.utils.load
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_apod.view.*
 
 
-class ApodListAdapter(val onClick: (Int,ApodViewData)->Unit) : RecyclerView.Adapter<ApodListAdapter.ApodViewHolder>() {
+class ApodListAdapter : RecyclerView.Adapter<ApodListAdapter.ApodViewHolder>() {
 
     private var apodItemList: List<ApodViewData> = listOf()
+
+    private val clickObservable: PublishSubject<ApodClickData> = PublishSubject.create()
 
     fun showLoadingMore() {
         //TODO
@@ -30,6 +32,8 @@ class ApodListAdapter(val onClick: (Int,ApodViewData)->Unit) : RecyclerView.Adap
     fun hideLoadingMore() {
         //TODO
     }
+
+    val clickEvent: Observable<ApodClickData> = clickObservable.hide()
 
     fun updateItems(apodItemList: List<ApodViewData>) {
         val diffResult = DiffUtil.calculateDiff(MyDiffCallback(this.apodItemList, apodItemList))
@@ -49,12 +53,18 @@ class ApodListAdapter(val onClick: (Int,ApodViewData)->Unit) : RecyclerView.Adap
         holder.bindView(apodItemList[position], position)
     }
 
-
     inner class ApodViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         fun bindView(apodViewData: ApodViewData, position: Int) {
-            itemView.setOnClickListener { view ->
-                onClick(position, apodViewData)
-            }
+
+            itemView.clicks()
+                .map {
+                    ApodClickData(
+                        position, apodViewData
+                    )
+                }
+                .subscribe(clickObservable)
+
             ViewCompat.setTransitionName(itemView, apodViewData.date.format())
             itemView.ivApod.load(
                 apodViewData.imageUrl,
@@ -67,4 +77,9 @@ class ApodListAdapter(val onClick: (Int,ApodViewData)->Unit) : RecyclerView.Adap
             )
         }
     }
+
+    data class ApodClickData(
+        val position: Int,
+        val apodViewData: ApodViewData
+    )
 }
