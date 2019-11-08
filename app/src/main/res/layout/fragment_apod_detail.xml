@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         tools:context=".apoddetails.ApodDetailFragment">
 
-    <ImageView
+    <com.ortiz.touchview.TouchImageView
             android:id="@+id/ivApod"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

@@ -4,7 +4,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
     }
     dependencies {
         classpath(BuildScript.gradle)
@@ -18,7 +17,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven {
+            setUrl("https://jitpack.io")
+        }
     }
 }
 

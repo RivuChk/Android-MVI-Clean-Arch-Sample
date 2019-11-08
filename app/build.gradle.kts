@@ -63,6 +63,8 @@ dependencies {
     implementation(Dependencies.AndroidX.material)
     implementation(Dependencies.AndroidX.cardView)
 
+    implementation(Dependencies.touchImageView)
+
     //Arch
     implementation(Dependencies.AndroidArch.viewModelLiveData)
     implementation(Dependencies.AndroidArch.lifecycleRuntime)

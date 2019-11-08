@@ -11,7 +11,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import dev.rivu.nasaapodarchive.R
-import dev.rivu.nasaapodarchive.domain.utils.format
 import dev.rivu.nasaapodarchive.presentation.apodlist.model.ApodViewData
 import dev.rivu.nasaapodarchive.utils.load
 import kotlinx.android.synthetic.main.fragment_apod_detail.*
@@ -39,6 +38,7 @@ class ApodDetailFragment : Fragment() {
     }
 
     private fun initView() {
+        ivApod.isZoomEnabled = false
         ivApod.load(
             apodViewData.imageUrl,
             RequestOptions()
@@ -49,7 +49,12 @@ class ApodDetailFragment : Fragment() {
                 .error(android.R.drawable.ic_menu_close_clear_cancel)
                 .override(Target.SIZE_ORIGINAL)
                 .dontTransform()
-        )
+                .dontAnimate()
+        ) { success ->
+            if (success) {
+                ivApod.isZoomEnabled = true
+            }
+        }
 
         tvApodDetailHeader.text = getString(R.string.apod_detail_header, apodViewData.dateStr)
         tvApodTitle.text = apodViewData.title
