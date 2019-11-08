@@ -7,12 +7,16 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
-    <LinearLayout
-            android:id="@+id/fragmentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="dev.rivu.nasaapodarchive.apodlist.ApodListFragment"
-            android:orientation="vertical"/>
+    <fragment
+            android:id="@+id/fragmentContainerNav"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

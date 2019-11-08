@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigation_main"
+        app:startDestination="@id/apodListFragment">
+
+    <fragment
+            android:id="@+id/apodListFragment"
+            android:name="dev.rivu.nasaapodarchive.apodlist.ApodListFragment"
+            android:label="fragment_apodlist"
+            tools:layout="@layout/fragment_apodlist" >
+        <action
+                android:id="@+id/action_list_to_detail"
+                app:destination="@id/apodDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/apodDetailFragment"
+            android:name="dev.rivu.nasaapodarchive.apoddetails.ApodDetailFragment"
+            android:label="fragment_apod_detail"
+            tools:layout="@layout/fragment_apod_detail" />
+
+
+</navigation>

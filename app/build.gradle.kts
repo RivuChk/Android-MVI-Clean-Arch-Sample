@@ -5,6 +5,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("kotlin-android-extensions")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -55,6 +56,7 @@ dependencies {
     kapt(Dependencies.Database.roomAnnotation)
 
     implementation(Dependencies.kotlin)
+
     implementation(Dependencies.AndroidX.appCompat)
     implementation(Dependencies.AndroidX.core)
     implementation(Dependencies.AndroidX.constraintLayout)
@@ -62,6 +64,8 @@ dependencies {
     implementation(Dependencies.AndroidX.legacySupport)
     implementation(Dependencies.AndroidX.material)
     implementation(Dependencies.AndroidX.cardView)
+    implementation(Dependencies.AndroidX.navigationFragment)
+    implementation(Dependencies.AndroidX.navigationUI)
 
     implementation(Dependencies.touchImageView)
 

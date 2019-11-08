@@ -1,8 +1,11 @@
 package dev.rivu.nasaapodarchive.apodlist
 
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.swiperefreshlayout.refreshes
@@ -27,8 +30,6 @@ import java.util.*
 import javax.inject.Inject
 
 class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> {
-
-    var showApodImageDetail: (view: View, apodViewData: ApodViewData) -> Unit = { _, _ -> }
 
     @Inject
     lateinit var viewModelFactory: ApdListViewModelFactory
@@ -60,8 +61,14 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     }
 
     private fun showImageDetailsAndClear(view: View, apodViewData: ApodViewData) {
-        showApodImageDetail(view, apodViewData)
         clearClickPublisher.onNext(ApodListIntent.ClearClickIntent)
+        val bundle = Bundle()
+        bundle.putParcelable("apodViewData", apodViewData)
+        val extras = FragmentNavigatorExtras(
+            view to apodViewData.date.format()
+        )
+        findNavController()
+            .navigate(R.id.action_list_to_detail, bundle, null, extras)
     }
 
     override fun bind() {

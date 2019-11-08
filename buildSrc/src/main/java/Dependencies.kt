@@ -15,6 +15,7 @@ object Versions {
         const val cardView = "1.0.0"
         const val legacySupport = "1.0.0"
         const val material = "1.0.0"
+        const val navigation = "2.1.0"
     }
     object Rx {
         const val rxJava2 = "2.2.11"
@@ -44,6 +45,7 @@ object Config {
 object BuildScript {
     const val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    const val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.AndroidX.navigation}"
 }
 
 object Dependencies {
@@ -56,6 +58,8 @@ object Dependencies {
         const val cardView = "androidx.cardview:cardview:${Versions.AndroidX.cardView}"
         const val legacySupport = "androidx.legacy:legacy-support-v4:${Versions.AndroidX.legacySupport}"
         const val material = "com.google.android.material:material:${Versions.AndroidX.material}"
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.navigation}"
+        const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
     }
     object Rx {
         const val rxJava2 = "io.reactivex.rxjava2:rxjava:${Versions.Rx.rxJava2}"
