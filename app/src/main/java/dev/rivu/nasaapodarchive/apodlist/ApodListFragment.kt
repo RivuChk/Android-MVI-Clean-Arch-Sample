@@ -66,7 +66,7 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
 
     override fun bind() {
         apodListViewModel.states()
-            .observe(this, Observer<ApodListState> { state ->
+            .observe(viewLifecycleOwner, Observer<ApodListState> { state ->
                 render(state)
             })
         apodListViewModel.processIntents(intents())
