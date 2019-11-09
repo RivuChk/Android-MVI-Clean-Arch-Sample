@@ -18,42 +18,69 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_apod.view.*
 
+const val APOD_ITEM = 1
+const val LOAD_MORE_ITEM = 2
 
 class ApodListAdapter : RecyclerView.Adapter<ApodListAdapter.ApodViewHolder>() {
 
-    private var apodItemList: List<ApodViewData> = listOf()
+    var apodItemList: List<ApodViewData> = listOf()
+        private set
 
     private val clickObservable: PublishSubject<ApodClickData> = PublishSubject.create()
 
+    var isShowingLoadingMore: Boolean = false
+
     fun showLoadingMore() {
-        //TODO
+        if (!isShowingLoadingMore) {
+            isShowingLoadingMore = true
+            notifyItemInserted(apodItemList.size)
+        }
     }
 
     fun hideLoadingMore() {
-        //TODO
+        if (isShowingLoadingMore) {
+            isShowingLoadingMore = false
+            notifyItemRemoved(apodItemList.size)
+        }
     }
 
     val clickEvent: Observable<ApodClickData> = clickObservable.hide()
 
     fun updateItems(apodItemList: List<ApodViewData>) {
-        val diffResult = DiffUtil.calculateDiff(MyDiffCallback(this.apodItemList, apodItemList))
+        val diffResult = DiffUtil.calculateDiff(MyDiffCallback(apodItemList, this.apodItemList))
         diffResult.dispatchUpdatesTo(this)
         this.apodItemList = apodItemList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApodViewHolder {
-        return ApodViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_apod, parent, false)
-        )
+        return if (viewType == APOD_ITEM) {
+            ApodViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.item_apod, parent, false),
+                viewType
+            )
+        } else {
+            ApodViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.item_load_more, parent, false),
+                viewType
+            )
+        }
     }
 
-    override fun getItemCount(): Int = apodItemList.size
+    override fun getItemCount(): Int =
+        if (isShowingLoadingMore) apodItemList.size + 1 else apodItemList.size
+
+    override fun getItemViewType(position: Int): Int =
+        if (position >= apodItemList.size && isShowingLoadingMore) LOAD_MORE_ITEM else APOD_ITEM
 
     override fun onBindViewHolder(holder: ApodViewHolder, position: Int) {
-        holder.bindView(apodItemList[position], position)
+        if (holder.viewType == APOD_ITEM) {
+            holder.bindView(apodItemList[position], position)
+        } else {
+            holder.bindLoadMoreItem()
+        }
     }
 
-    inner class ApodViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ApodViewHolder(view: View, val viewType: Int) : RecyclerView.ViewHolder(view) {
 
         fun bindView(apodViewData: ApodViewData, position: Int) {
 
@@ -75,6 +102,10 @@ class ApodListAdapter : RecyclerView.Adapter<ApodListAdapter.ApodViewHolder>() {
                     .placeholder(R.drawable.ic_image_placeholder)
                     .error(android.R.drawable.ic_menu_close_clear_cancel)
             )
+        }
+
+        fun bindLoadMoreItem() {
+
         }
     }
 

@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import dev.rivu.nasaapodarchive.cache.model.ApodEntity
 import io.reactivex.Completable
-import io.reactivex.Single
+import io.reactivex.Maybe
 
 @Dao
 interface ApodDao {
@@ -15,7 +15,7 @@ interface ApodDao {
     fun saveApods(apods: List<ApodEntity>): Completable
 
     @Query("select * from apod where date like :date")
-    fun getApod(date: String): Single<ApodEntity>
+    fun getApod(date: String): Maybe<ApodEntity>
 
     @Query("DELETE from apod")
     fun deleteAllApods(): Completable

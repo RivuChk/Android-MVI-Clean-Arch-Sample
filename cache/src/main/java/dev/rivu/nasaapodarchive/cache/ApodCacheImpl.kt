@@ -5,6 +5,7 @@ import dev.rivu.nasaapodarchive.cache.mapper.ApodEntityMapper
 import dev.rivu.nasaapodarchive.data.repository.ApodCache
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class ApodCacheImpl @Inject constructor(private val apodDao: ApodDao, private va
         return apodDao.saveApods(apods.map(apodEntityMapper::mapFromDomain))
     }
 
-    override fun getApod(date: String): Single<APOD> {
+    override fun getApod(date: String): Maybe<APOD> {
         return apodDao.getApod(date)
             .map(apodEntityMapper::mapToDomain)
     }

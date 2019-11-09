@@ -16,13 +16,28 @@ class APODListRepositoryImpl(
     override fun getApod(date: String): Single<APOD> {
         return cachedDataStore
             .getApod(date)
-            .onErrorResumeNext {
+            .switchIfEmpty(
                 remoteDataStore.getApod(date)
                     .flatMap { apod ->
                         saveApods(apod)
-                            .toSingle { apod }
+                            .andThen(
+                                Maybe.just(apod)
+                            )
                     }
-            }
+                    .toSingle(
+                        //Returns a default item, in case both Remote and Cache couldn't fetch the item
+                        //Filtered in #getApods
+                        //TODO: Find a better solution than this
+                        APOD(
+                            date = date.parseDate(),
+                            explanation = "",
+                            mediaType = APOD.MediaType.IMAGE,
+                            title = "Error",
+                            url = "",
+                            hdUrl = ""
+                        )
+                    )
+            )
     }
 
     override fun getApods(startDate: String, count: Int): Single<List<APOD>> {
@@ -34,10 +49,16 @@ class APODListRepositoryImpl(
                 emitter.onNext(date)
             }
             emitter.onComplete()
-        }, BackpressureStrategy.BUFFER).concatMap { date ->
-            getApod(date)
-                .toFlowable()
-        }.toList()
+        }, BackpressureStrategy.BUFFER)
+            .concatMap { date ->
+                getApod(date)
+                    .toFlowable()
+                    .filter {
+                        //Filter Default items
+                        //TODO: Find a btter solution
+                        !it.title.equals("error", true)
+                    }
+            }.toList()
     }
 
     override fun saveApods(vararg apods: APOD): Completable {

@@ -2,6 +2,7 @@ package dev.rivu.nasaapodarchive.data.repository
 
 import dev.rivu.nasaapodarchive.domain.model.APOD
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 interface ApodCache {
@@ -19,7 +20,7 @@ interface ApodCache {
     /**
      * Retrieve a single Apod, from the cache.
      */
-    fun getApod(date: String): Single<APOD>
+    fun getApod(date: String): Maybe<APOD>
 
     /**
      * Check whether there is a list of Apods stored in the cache.

@@ -8,11 +8,13 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jakewharton.rxbinding3.recyclerview.scrollEvents
 import com.jakewharton.rxbinding3.swiperefreshlayout.refreshes
 import com.jakewharton.rxbinding3.view.detaches
 import dev.rivu.nasaapodarchive.R
 import dev.rivu.nasaapodarchive.base.BaseFragment
 import dev.rivu.nasaapodarchive.domain.utils.format
+import dev.rivu.nasaapodarchive.domain.utils.parseDate
 import dev.rivu.nasaapodarchive.presentation.apodlist.ApdListViewModelFactory
 import dev.rivu.nasaapodarchive.presentation.apodlist.ApodListIntent
 import dev.rivu.nasaapodarchive.presentation.apodlist.ApodListState
@@ -45,7 +47,9 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
 
     private lateinit var layoutManager: GridLayoutManager
 
-    var today: String = Calendar.getInstance().time.format()
+    private val today: String by lazy {
+        Calendar.getInstance().time.format()
+    }
 
     private val apodListViewModel: ApodListViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)
@@ -58,6 +62,12 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
         layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
         rvApodlist.layoutManager = layoutManager
         rvApodlist.adapter = adapter
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return adapter.getItemViewType(position)
+            }
+
+        }
     }
 
     private fun showImageDetailsAndClear(view: View, apodViewData: ApodViewData) {
@@ -80,10 +90,10 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
     }
 
     override fun intents(): Observable<ApodListIntent> {
-        return Observable.merge(
+        return Observable.mergeArray(
             Observable.just(ApodListIntent.InitialIntent(today, 10)),
             swipeRefreshApodlist.refreshes().map {
-                ApodListIntent.RefreshIntent(today, 10)
+                ApodListIntent.RefreshIntent(today, layoutManager.itemCount)
             },
             adapter.clickEvent
                 .map { clickData ->
@@ -93,7 +103,24 @@ class ApodListFragment : BaseFragment(), MviView<ApodListIntent, ApodListState> 
                     )
                 }
                 .takeUntil(rvApodlist.detaches()),
-            clearClickPublisher
+            clearClickPublisher,
+            rvApodlist.scrollEvents()
+                .filter {
+                    val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                    val totalItems = layoutManager.itemCount
+                    lastVisibleItem >= totalItems - 1
+                }
+                .map {
+                    val lastDate = adapter.apodItemList.last().date
+                    val calendar = Calendar.getInstance()
+                    calendar.time = lastDate
+                    calendar.add(Calendar.DAY_OF_MONTH, -1)
+                    val nextPageStartDate = calendar.time.format()
+                    ApodListIntent.LoadMoreIntent(
+                        startDate = nextPageStartDate,
+                        count = 4
+                    ) as ApodListIntent
+                }
         )
     }
 
