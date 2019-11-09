@@ -3,8 +3,10 @@ package dev.rivu.nasaapodarchive.data.source
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.whenever
 import dev.rivu.nasaapodarchive.data.factory.APODFactory
 import dev.rivu.nasaapodarchive.data.repository.ApodRemote
+import io.reactivex.Single
 
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +23,8 @@ class ApodRemoteDataStoreTest {
     }
 
     @Test
-    fun `getApod should ApodRemote#getApod`() {
+    fun `getApod shouldcall  ApodRemote#getApod`() {
+        whenever(mockApodRemote.getApod(anyString())).thenReturn(Single.just(APODFactory.makeAPOD()))
         apodRemoteDataStore.getApod("2018-08-26")
         verify(mockApodRemote, times(1)).getApod(anyString())
     }

@@ -5,11 +5,9 @@ import dev.rivu.nasaapodarchive.cache.dao.ApodDao
 import dev.rivu.nasaapodarchive.cache.mapper.ApodEntityMapper
 import dev.rivu.nasaapodarchive.cache.test.factory.APODFactory
 import io.reactivex.Completable
-import io.reactivex.Single
+import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test
-
-import org.junit.Assert.*
 import org.mockito.ArgumentMatchers.anyList
 import org.mockito.ArgumentMatchers.anyString
 
@@ -58,7 +56,7 @@ class ApodCacheImplTest {
     @Test
     fun getApod() {
         whenever(mockApodDao.getApod(anyString()))
-            .thenReturn(Single.just(APODFactory.makeApodEntity()))
+            .thenReturn(Maybe.just(APODFactory.makeApodEntity()))
         whenever(mockApodEntityMapper.mapToDomain(any()))
             .thenReturn(APODFactory.makeApod())
 
